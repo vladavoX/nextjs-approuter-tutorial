@@ -1,5 +1,14 @@
 import Image from 'next/image'
 
+import Hero from 'public/hero.png'
+
 export default function Home() {
-	return <div>Home</div>
+	return (
+		<div>
+			<Image
+				src={Hero}
+				alt='hero'
+			/>
+		</div>
+	)
 }
