@@ -1,17 +1,26 @@
 import Image from 'next/image'
-import React from 'react'
+import { notFound } from 'next/navigation'
 
-const BlogPost = () => {
+async function getData(id) {
+	const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+		cache: 'no-cache'
+	})
+
+	if (!res.ok) {
+		return notFound()
+	}
+
+	return res.json()
+}
+
+const BlogPost = async ({ params }) => {
+	const data = await getData(params.id)
 	return (
 		<div>
 			<div className='flex'>
 				<div className='flex-1 flex flex-col justify-between gap-8'>
-					<h1 className='text-4xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum, expedita.</h1>
-					<p className='text-lg font-light'>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam sapiente aliquam sit illo minus
-						voluptates autem. Dolore voluptatem tenetur perspiciatis quae, maiores nesciunt ex ratione ullam, vitae,
-						quasi rem assumenda!
-					</p>
+					<h1 className='text-4xl'>{data.title}</h1>
+					<p className='text-lg font-light'>{data.body}</p>
 					<div className='flex items-center gap-2'>
 						<Image
 							src='https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg'
