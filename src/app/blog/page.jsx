@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 async function getData() {
-	const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+	const res = await fetch('http://localhost:3000/api/posts', {
 		cache: 'no-cache'
 	})
 
@@ -20,19 +20,19 @@ const Blog = async () => {
 			{data.map(item => (
 				<Link
 					key={item.id}
-					href={`/blog/${item.id}`}
+					href={`/blog/${item._id}`}
 					className='flex items-center gap-12 mb-12'
 				>
 					<Image
 						className='object-cover'
-						src='https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg'
+						src={item.image}
 						alt=''
 						width={400}
 						height={250}
 					/>
 					<div>
 						<h1 className='mb-2'>{item.title}</h1>
-						<p className='text-lg text-[#999]'>{item.body}</p>
+						<p className='text-lg text-[#999]'>{item.desc}</p>
 					</div>
 				</Link>
 			))}
