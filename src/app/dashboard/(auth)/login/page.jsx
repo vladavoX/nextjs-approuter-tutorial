@@ -48,7 +48,12 @@ const Login = () => {
 					/>
 					<button className='p-5 cursor-pointer bg-lightGreen border-none rounded-sm text-white'>Login</button>
 				</form>
-				<button onClick={() => signIn('google')}>Login with Google</button>
+				<button
+					className='p-5 cursor-pointer bg-red-500 border-none rounded-sm text-white w-[300px]'
+					onClick={() => signIn('google')}
+				>
+					Login with Google
+				</button>
 			</div>
 		)
 	}

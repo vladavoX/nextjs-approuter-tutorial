@@ -12,8 +12,6 @@ const Dashboard = () => {
 	const fetcher = (...args) => fetch(...args).then(res => res.json())
 	const { data, mutate, error, isLoading } = useSWR(`/api/posts?username=${session.data?.user.name}`, fetcher)
 
-	console.log(data)
-
 	if (session.status === 'loading') {
 		return <p>Loading...</p>
 	}
@@ -45,6 +43,7 @@ const Dashboard = () => {
 				})
 			})
 			mutate()
+			e.target.reset()
 		} catch (error) {
 			console.log(error)
 		}
@@ -81,6 +80,8 @@ const Dashboard = () => {
 											alt=''
 											className='object-cover'
 											fill
+											sizes='(max-width: 768px) 100vw, 200px'
+											priority
 										/>
 									</div>
 									<h2 className='font-semibold text-xl'>{post.title}</h2>
